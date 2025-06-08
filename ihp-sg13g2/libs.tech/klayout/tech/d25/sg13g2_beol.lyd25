@@ -1,26 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
- # Copytight 2025, IHP Open PDK Authors
- # Licensed under the Apache License, Version 2.0 (the "License");
- # you may not use this file except in compliance with the License.
- # You may obtain a copy of the License at
- #
- #     http://www.apache.org/licenses/LICENSE-2.0
- #
- # This file incorporates code from sky130_klayout_pdk
- # (https://github.com/efabless/sky130_klayout_pdk, licensed under Apache License 2.0.
- # Modifications:
- # - The metal stack describes the BEOL stack of the SG13G2 PDK.
- # - The structure of the macro is based on the sky130_klayout_pdk.
- #
- # Unless required by applicable law or agreed to in writing, software
- # distributed under the License is distributed on an "AS IS" BASIS,
- # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- # See the License for the specific language governing permissions and
- # limitations under the License.
- #
--->
-
 <klayout-macro>
  <description>BEOL 2.5D Viewer</description>
  <version>0.1</version>
@@ -69,6 +47,11 @@ Rppd  = SalBlock &amp; pSD - nSD # SalBlock + pSD only in Rppd
 Rsil  = PolyRes - Rhigh - Rppd 
 RGatPoly = GatPoly - Rhigh - Rppd - Rsil # Gatpoly around resistor
 
+# MOS
+NWell = input(31, 0)
+PWell = input(46, 0)
+#pmos = NWell &amp; pSD # NWell + pSD only in pmos
+
 # Cont can go down to substrate or stop at poly resistors
 Cont_to_Gatpoly = Cont &amp; GatPoly
 Cont_to_Activ   = Cont - GatPoly
@@ -93,6 +76,10 @@ z(RGatPoly,name:"GatPoly", zstart: 0.400, height: 0.140, color: 0x0000ff)
 z(Rsil,   name:"Rsil",    zstart: 0.400, height: 0.140, color: 0xaa0000)
 z(Rhigh,  name:"Rhigh",   zstart: 0.400, height: 0.140, color: 0xcc0044)
 z(Rppd,   name:"Rppd",    zstart: 0.400, height: 0.140, color: 0xff0088)
+z(NWell, name:"NWell", zstart: 0.000, height: 0.398, color: 0xccffcc)
+z(pSD, name:"pSD", zstart: 0.000, height: 0.399, color: 0xffffcc)
+z(PWell, name:"PWell", zstart: 0.000, height: 0.398, color: 0x111111)
+z(nSD, name:"nSD", zstart: 0.000, height: 0.399, color: 0x99ff99)
 z(Cont_to_Activ,   name:"Cont-&gt;Activ",   zstart: 0.400, height: 0.640, color: 0x00ffff)
 z(Activ,  name:"Activ",   zstart: 0.000, height: 0.400, color: 0x00ff00)
  </text>
